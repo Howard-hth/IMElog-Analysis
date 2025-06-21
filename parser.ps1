@@ -9,7 +9,6 @@ $logContents = Get-Content -Path $workplace + $logfile # type: Object[]
 ## Content: "Received configuration JSON: {'key':'value','id':7,'active':false}", "23:05:09.000039", "4-16-2023", "ConfigManager", "Deploy", "3", "99", "data.json"
 $csvTitle = '"Message", "time", "date", "component", "context", "type", "thread", "file"'
 $csvContent = @($csvTitle)
-$csvContent += '"[ScriptRunner] Executing PowerShell script: `Install-Module -Name IntuneManagement -Force`","23:05:10.000050","4-16-2023","IntuneManagementExtension","","1","10","script.ps1"'
 $partialLines = ""
 $replaceRefs = @(
     @(" date=", ","),
@@ -25,7 +24,7 @@ forEach ($content in $logContents){
     $partialLines += $content
     $rawLine = $partialLines -split "]LOG]!><time="
     $count = $rawLine | Measure-Object | Select-Object -ExpandProperty Count
-    if ($count -ne 2){
+    if ($count -ne 2){ # Indicating this is not a full line
         $partialLines += "\n"
     }else{
         $message = ""
