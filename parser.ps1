@@ -1,7 +1,8 @@
 # Get file line by line (NOT RAW STRING)
 $workplace = "C:\Users\User\Desktop\IMElog_analysis\" # Replace with appropriate path
 $logFile = "IntuneManagementExtension-yyyymmdd-hhmmss.log" # Replace with appropriate path
-$logContents = Get-Content -Path $workplace + $logfile # type: Object[]
+$fullLogPath = $workplace + $logfile
+$logContents = Get-Content -Path $fullLogPath # type: Object[]
 
 # Initial Line: <![LOG[[ConfigUpdate] Received configuration JSON: {"key":"value","id":7,"active":false}]LOG]!><time="23:05:09.000039" date="4-16-2023" component="ConfigManager" context="Deploy" type="3" thread="99" file="data.json">
 # Target Output: 
